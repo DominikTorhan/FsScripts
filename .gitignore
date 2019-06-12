@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FsScripts/obj
+/.vs/FsScripts/v16
+/.vs/FsScripts/DesignTimeBuild
