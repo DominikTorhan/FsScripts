@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FsScripts", "FsScripts\FsScripts.fsproj", "{BA83ED04-76F3-4037-8402-0FE134E3C2F6}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FsScripts", "FsScripts\FsScripts.fsproj", "{BA83ED04-76F3-4037-8402-0FE134E3C2F6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UnitTests", "UnitTests\UnitTests.fsproj", "{33888354-47D0-41F1-9A73-A289CE6C43C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BA83ED04-76F3-4037-8402-0FE134E3C2F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA83ED04-76F3-4037-8402-0FE134E3C2F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA83ED04-76F3-4037-8402-0FE134E3C2F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33888354-47D0-41F1-9A73-A289CE6C43C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33888354-47D0-41F1-9A73-A289CE6C43C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33888354-47D0-41F1-9A73-A289CE6C43C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33888354-47D0-41F1-9A73-A289CE6C43C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

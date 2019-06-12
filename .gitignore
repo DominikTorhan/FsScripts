@@ -5,3 +5,6 @@
 /FsScripts/obj
 /.vs/FsScripts/v16
 /.vs/FsScripts/DesignTimeBuild
+/FsScripts/bin/Debug/netcoreapp2.2
+/UnitTests/bin/Debug/netcoreapp2.2
+/UnitTests/obj
