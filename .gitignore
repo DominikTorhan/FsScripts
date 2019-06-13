@@ -8,3 +8,6 @@
 /FsScripts/bin/Debug/netcoreapp2.2
 /UnitTests/bin/Debug/netcoreapp2.2
 /UnitTests/obj
+/FsScripts/bin/Debug/netcoreapp2.1
+/UnitTests/bin/Debug/netcoreapp2.1
+/.vs/FsScripts/v15
