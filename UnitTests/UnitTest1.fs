@@ -2,6 +2,7 @@ namespace Tests
 
 open NUnit.Framework
 open System
+open System.Text.RegularExpressions
 
 [<TestClass>]
 type TestClass () =
@@ -56,6 +57,27 @@ type TestClass () =
         let strNew = seq' |> String.concat " " 
         Assert.AreEqual("1line - 2line - 4line -", strNew)
          
-    //[<Test>] 
-    //member this.Test8 () =
-    //    let str = "AAA, bb. BB-aaa    \n bb Aaa bb 1234065(bb) "
+    [<Test>] 
+    member this.Test8 () =
+        //let str = "AAA, bb. BB-aaa    \n bb Aaa bb 1234065(bb) " 
+        let str = "Regular expression active pattern" 
+        let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b") 
+        Assert.AreEqual(4, matches.Count)
+         
+    [<Test>] 
+    member this.Test9 () =
+        let str = " 1line \n 2line   \n3line\n4line\n\n" 
+        let matches = Regex.Matches(str, @".+")
+        let seq = matches |> Seq.cast
+        let len = seq |> Seq.length
+        Assert.AreEqual(4, len)
+             
+    [<Test>] 
+    member this.Test10()=
+        let str = "AAa"   
+        let x = str |> Seq.map (fun c -> Char.ToLower c)
+        let head = x |> Seq.head
+        let str' = str
+        
+        Assert.AreEqual("Aaa", str')
+        
