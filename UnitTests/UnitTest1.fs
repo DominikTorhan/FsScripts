@@ -6,6 +6,18 @@ open System.Text.RegularExpressions
 
 [<TestClass>]
 type TestClass () =
+ 
+    member this.StringToWords(str: string)=
+        let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b")  
+        let seq = matches |> Seq.cast
+        seq
+
+    member this.TextFileToSeq(path:string) = 
+        let str = System.IO.File.ReadAllText path
+        let seq = this.StringToWords str 
+        let seq' = seq |> Seq.distinct |> Seq.sort
+        seq'
+    
 
     [<SetUp>]
     member this.Setup () =
@@ -72,12 +84,25 @@ type TestClass () =
         let len = seq |> Seq.length
         Assert.AreEqual(4, len)
              
+    [<TestCase("AAa", "Aaa")>] 
+    [<TestCase("big", "Big")>] 
+    [<TestCase("PRIVATE", "Private")>] 
+    member this.Test10(str : string, expected : string)=
+        let seq = str |> Seq.map (fun c -> Char.ToLower c)
+        let head = seq |> Seq.head |> Char.ToUpper
+        let seqRest = seq |> Seq.skip 1 |> String.Concat
+        let result = head.ToString() + seqRest
+        Assert.AreEqual(expected, result)
+        
+    [<Test>]
+    member this.Test11()=
+        let seq = seq ["Make"; "Zip"; "Put";"Hear";"Tear";"Jot";"Upper";"Zest";"Wit";"Steam";"Ream";]  
+        let seqSorted = seq |> Seq.sort
+        let str = seqSorted |> String.concat "\n" 
+        Assert.Pass() 
+ 
     [<Test>] 
-    member this.Test10()=
-        let str = "AAa"   
-        let x = str |> Seq.map (fun c -> Char.ToLower c)
-        let head = x |> Seq.head
-        let str' = str
-        
-        Assert.AreEqual("Aaa", str')
-        
+    member this.TestTextFileToSeq()= 
+        let path = "C:\Users\dominik\Source\Repos\FsScripts\UnitTests\TextFile1.txt"  
+        let seq = this.TextFileToSeq path
+        ()
