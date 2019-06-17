@@ -8,8 +8,9 @@ open System.Text.RegularExpressions
 type TestClass () =
  
     member this.StringToWords(str: string)=
-        let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b")  
-        let seq = matches |> Seq.cast
+        let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b")    
+        let matchToStr (item : Match) = item.Value
+        let seq = matches |> Seq.cast |> Seq.map matchToStr
         seq
 
     member this.TextFileToSeq(path:string) = 
@@ -103,6 +104,7 @@ type TestClass () =
  
     [<Test>] 
     member this.TestTextFileToSeq()= 
-        let path = "C:\Users\dominik\Source\Repos\FsScripts\UnitTests\TextFile1.txt"  
-        let seq = this.TextFileToSeq path
-        ()
+        let path = "TextFile1.txt"  
+        let seq = this.TextFileToSeq path 
+        let len = seq |> Seq.length
+        Assert.AreEqual(12, len)
