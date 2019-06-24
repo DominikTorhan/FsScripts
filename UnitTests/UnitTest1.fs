@@ -6,18 +6,30 @@ open System.Text.RegularExpressions
 
 [<TestClass>]
 type TestClass () =
+
+    member this.FormatWord(str: string)= 
+        let seq = str |> Seq.map (fun c -> Char.ToLower c)
+        let head = seq |> Seq.head |> Char.ToUpper
+        let seqRest = seq |> Seq.skip 1 |> String.Concat
+        let result = head.ToString() + seqRest
+        result
  
     member this.StringToWords(str: string)=
         let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b")    
         let matchToStr (item : Match) = item.Value
-        let seq = matches |> Seq.cast |> Seq.map matchToStr
+        let seq = matches |> Seq.cast |> Seq.map matchToStr |> Seq.map this.FormatWord
         seq
+         
+    member this.SeqToText(seq: seq<string>)=
+        let str = seq |> String.concat "\n" 
+        str
 
     member this.TextFileToSeq(path:string) = 
         let str = System.IO.File.ReadAllText path
         let seq = this.StringToWords str 
         let seq' = seq |> Seq.distinct |> Seq.sort
-        seq'
+        this.SeqToText seq'
+
     
 
     [<SetUp>]
@@ -88,23 +100,21 @@ type TestClass () =
     [<TestCase("AAa", "Aaa")>] 
     [<TestCase("big", "Big")>] 
     [<TestCase("PRIVATE", "Private")>] 
-    member this.Test10(str : string, expected : string)=
-        let seq = str |> Seq.map (fun c -> Char.ToLower c)
-        let head = seq |> Seq.head |> Char.ToUpper
-        let seqRest = seq |> Seq.skip 1 |> String.Concat
-        let result = head.ToString() + seqRest
+    member this.TestFormatWord(str : string, expected : string)=
+        let result = this.FormatWord str
         Assert.AreEqual(expected, result)
         
     [<Test>]
-    member this.Test11()=
+    member this.TestSeqToText()=
         let seq = seq ["Make"; "Zip"; "Put";"Hear";"Tear";"Jot";"Upper";"Zest";"Wit";"Steam";"Ream";]  
-        let seqSorted = seq |> Seq.sort
-        let str = seqSorted |> String.concat "\n" 
+        //let seqSorted = seq |> Seq.sort
+        //let str = seqSorted |> String.concat "\n" 
+        let str = this.SeqToText seq
         Assert.Pass() 
  
     [<Test>] 
     member this.TestTextFileToSeq()= 
         let path = "TextFile1.txt"  
-        let seq = this.TextFileToSeq path 
-        let len = seq |> Seq.length
+        let str = this.TextFileToSeq path 
+        let len = str |> Seq.length
         Assert.AreEqual(12, len)
