@@ -6,6 +6,14 @@ open System.Text.RegularExpressions
 
 [<TestClass>]
 type TestClass () =
+ 
+    member this.SplitToLines(str: string)=
+        let seq = str.Split "\n" |> Array.toSeq 
+        seq 
+ 
+    member this.IsLineContainsWord(str: string, word: string) = 
+        let matches = Regex.Matches(str, word)    
+        matches.Count > 0
 
     member this.FormatWord(str: string)= 
         let seq = str |> Seq.map (fun c -> Char.ToLower c)
@@ -33,13 +41,27 @@ type TestClass () =
     
 
     [<SetUp>]
-    member this.Setup () =
+    member this.Setup () = 
         ()
 
     //[<Test>]
     //member this.Test1 () =
     //    Assert.Pass()
+
+    [<TestCase(true, "word x", "word")>] 
+    [<TestCase(false, "line line", "word")>] 
+    [<TestCase(true, "line line", "line")>] 
+    member this.TestIsLineContainsWord (expected:bool, line : string, word : string) = 
+        let x = this.IsLineContainsWord(line, word)
+        Assert.AreEqual(expected, x)
           
+    [<Test>] 
+    member this.Test1 () =  
+        let path = "Dict.txt"  
+        let str = System.IO.File.ReadAllText path 
+        let seq = this.SplitToLines str
+        Assert.Pass()
+
     [<Test>]
     member this.Test2 () =
         let str = "abc  sdf  " 
