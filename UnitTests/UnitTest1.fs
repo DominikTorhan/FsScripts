@@ -37,16 +37,54 @@ type TestClass () =
         let seq = this.StringToWords str 
         let seq' = seq |> Seq.distinct |> Seq.sort
         this.SeqToText seq'
+    
+    member this.IsLineContainsTranslataion (line:string)= 
+        let strs = line.Split([|' '|], StringSplitOptions.RemoveEmptyEntries)
+        strs.Length > 1
+        
+    member this.GetFirstWordFromLine(line:string)=
+        let strs = line.Split([|' '|], StringSplitOptions.RemoveEmptyEntries) 
+        match strs.Length with
+            | 0 -> ""
+            | _ -> strs.[0]
 
+    member this.GetAllTranslatedWord (path: string)=
+        let str = System.IO.File.ReadAllText path 
+        let seq = this.SplitToLines str 
+        seq |> Seq.filter this.IsLineContainsTranslataion 
+            |> Seq.map this.GetFirstWordFromLine
     
 
     [<SetUp>]
     member this.Setup () = 
         ()
+           
+    [<Test>]
+    member this.Test10()= 
+        let seqNew = seq ["Make"; "Zip"; "Put";"Hear";]  
+        let seqDict = seq ["Make"; "Zip"; ]    
+        let predicate (s:string) = not (seqDict |> Seq.contains s)
+        let seqOut = seqNew |> Seq.filter predicate 
+        Assert.AreEqual(seq ["Put";"Hear";]  , seqOut )
+
+    [<TestCase("word", "word x")>] 
+    [<TestCase("line", "line line")>] 
+    [<TestCase("line", "line")>] 
+    [<TestCase("", "")>] 
+    member this.TestGetFirstWordFromLine(expected:string, line : string) =  
+        Assert.AreEqual(expected, this.GetFirstWordFromLine line)
 
     //[<Test>]
     //member this.Test1 () =
-    //    Assert.Pass()
+    //    Assert.Pass() 
+    [<TestCase(true, "word x")>] 
+    [<TestCase(true, "line line")>] 
+    [<TestCase(false, "line")>] 
+    [<TestCase(false, "line ")>] 
+    member this.TestIsLineContainsTranslataion (expected:bool, line : string) =  
+        Assert.AreEqual(expected, this.IsLineContainsTranslataion line)
+ 
+ 
 
     [<TestCase(true, "word x", "word")>] 
     [<TestCase(false, "line line", "word")>] 
@@ -56,10 +94,8 @@ type TestClass () =
         Assert.AreEqual(expected, x)
           
     [<Test>] 
-    member this.Test1 () =  
-        let path = "Dict.txt"  
-        let str = System.IO.File.ReadAllText path 
-        let seq = this.SplitToLines str
+    member this.TestGetAllTranslatedWord () =   
+        let seq = this.GetAllTranslatedWord "Dict.txt"
         Assert.Pass()
 
     [<Test>]
@@ -134,9 +170,8 @@ type TestClass () =
         let str = this.SeqToText seq
         Assert.Pass() 
  
-    [<Test>] 
-    member this.TestTextFileToSeq()= 
-        let path = "TextFile1.txt"  
-        let str = this.TextFileToSeq path 
-        let len = str |> Seq.length
-        Assert.AreEqual(12, len)
+    [<TestCase("TextFile1.txt")>] 
+    [<TestCase("C:\Users\Admin\OneDrive\Documents\Managing_Oneself.txt")>] 
+    member this.TestTextFileToSeq(path:string)= 
+        let str = this.TextFileToSeq path  
+        Assert.Pass() 
