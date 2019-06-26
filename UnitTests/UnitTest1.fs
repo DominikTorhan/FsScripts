@@ -6,6 +6,9 @@ open System.Text.RegularExpressions
 
 [<TestClass>]
 type TestClass () =
+
+    member this.FolderNe = "E:\\test\\"
+
  
     member this.SplitToLines(str: string)=
         let seq = str.Split "\n" |> Array.toSeq 
@@ -35,8 +38,7 @@ type TestClass () =
     member this.TextFileToSeq(path:string) = 
         let str = System.IO.File.ReadAllText path
         let seq = this.StringToWords str 
-        let seq' = seq |> Seq.distinct |> Seq.sort
-        this.SeqToText seq'
+        seq |> Seq.distinct |> Seq.sort
     
     member this.IsLineContainsTranslataion (line:string)= 
         let strs = line.Split([|' '|], StringSplitOptions.RemoveEmptyEntries)
@@ -54,17 +56,36 @@ type TestClass () =
         seq |> Seq.filter this.IsLineContainsTranslataion 
             |> Seq.map this.GetFirstWordFromLine
     
+    member this.WriteTextFile (text: string)=
+        let path =  this.FolderNe + "Output" + DateTime.Now.ToString("yyyyMMddTHHmmss") + ".txt" 
+        System.IO.File.WriteAllText(path, text) 
+
+    member this.GetSeqNoneTranslatedWords(seqText:seq<string>, seqDict:seq<string>)=
+        let predicate (s:string) = not (seqDict |> Seq.contains s)
+        seqText |> Seq.filter predicate 
+
 
     [<SetUp>]
     member this.Setup () = 
         ()
-           
+               
+    [<Test>]
+    member this.Test11()=
+        let seqText = this.TextFileToSeq(this.FolderNe + "text.txt")
+        let seqDict = this.GetAllTranslatedWord(this.FolderNe + "dict.txt")
+        let seqOut = this.GetSeqNoneTranslatedWords(seqText, seqDict)
+        //let xxx = seqDict |> Seq.filter (fun s -> seqText |> Seq.contains s)
+        let str = this.SeqToText seqOut
+        let str' = "count " + (Seq.length seqOut).ToString() + "\n\n" + str
+        this.WriteTextFile str'
+        Assert.Pass()
+
+
     [<Test>]
     member this.Test10()= 
-        let seqNew = seq ["Make"; "Zip"; "Put";"Hear";]  
-        let seqDict = seq ["Make"; "Zip"; ]    
-        let predicate (s:string) = not (seqDict |> Seq.contains s)
-        let seqOut = seqNew |> Seq.filter predicate 
+        let seqText = seq ["Make"; "Zip"; "Put";"Hear";]  
+        let seqDict = seq ["Make"; "Zip"; ]     
+        let seqOut = this.GetSeqNoneTranslatedWords(seqText, seqDict)
         Assert.AreEqual(seq ["Put";"Hear";]  , seqOut )
 
     [<TestCase("word", "word x")>] 
@@ -173,5 +194,7 @@ type TestClass () =
     [<TestCase("TextFile1.txt")>] 
     [<TestCase("C:\Users\Admin\OneDrive\Documents\Managing_Oneself.txt")>] 
     member this.TestTextFileToSeq(path:string)= 
-        let str = this.TextFileToSeq path  
+        let seq = this.TextFileToSeq path  
         Assert.Pass() 
+
+        
