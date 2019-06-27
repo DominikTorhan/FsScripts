@@ -13,9 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Dict.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Compile Include="Main.fs" />
+    <None Include="ReadWords.fsx" />
     <Content Include="TextFile1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -23,6 +22,8 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
 
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FsScripts\FsScripts.fsproj" />
+  </ItemGroup>
 
 </Project>

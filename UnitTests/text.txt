@@ -1,0 +1,117 @@
+Homepage
+ITNEXT
+ABOUT ITNEXTWRITE FOR ITNEXTMEETUPSSUMMITFEATURED VACANCIES @ LINKIT
+11 Best Programming Fonts
+Go to the profile of Charlee Li
+Charlee Li
+May 15, 2018
+There are many posts and sites comparing fonts for programming and they are all amazing articles. So why I repeated the same subject here? Since I always found myself lost in dozens of fonts and could not figuer out which one was best for me. So today I tried many fonts and picked up the following fonts for you. These fonts are pretty popular and easy to get. And most importantly, all these fonts are FREE!
+
+I ranked the fonts with the following metrics:
+
+Whether similar characters are distinguishable, such as 0O, 1lI
+Whether the font style (line width, character width / height) is easy to read
+And my personal preference!
+Screenshots are all made with VSCode from the same code snippet. Unless noted, all the screenshots use the same setting "editor.fontSize": 14.
+
+1. Hack
+Hack is an open source font specifically designed for source code and is based on Bitstream Vera and DejaVu projects. 0O and 1lI are clearly distinguishable and the font is easy to read overall. Specifically I like the slashed zero.
+
+
+2. DejaVu Sans Mono
+Derived from Bitstream Vera, DejaVu is also a great free licensed font. Sans Mono clearly distinguishes 0O and 1lI. The dot inside 0 is a little small compared to Hack but overall this font makes people comfortable.
+
+
+3. Monaco
+Monaco is the default font used by OSX before Snow Leopard. Characters are distinct so its difficult to confuse 0O and 1lI. I like this font because of its special style that makes me feel like using OSX again (I am using Ubuntu mainly now).
+
+
+4. Source Code Pro
+Source Code Pro is designed by Adobe. Overall the text looks clearer than other fonts, not to mention its distinguishable characters.
+
+
+5. Menlo
+Menlo is the new default font in macOS for Xcode and Terminal. It is a derivative of DejaVu Sans Mono. Personally I like Monaco better since I was using OSX from long time ago, but Menlo is also a good choice for programming.
+
+
+UPDATE: Menlo is no longer the default font in macOS. In macOS High Sierra, the default font has been changed to San Francisco Mono, which is also a great choice for programming. Thanks to Ivan Cantarino and p13t3rm.
+
+6. Consolas
+Consolas is the default font for Microsoft Visual Studio. It is very popular because it is shipped with Windows. Personally I don’t quite like the l character since it is easily confused with 1.
+
+7. Space Mono
+Space Mono is designed by Colophon Foundry and is a great monospace font. Two cons that I don’t like: (1) l might confuse with 1 (2) , is not distinguishable with . under 14pt font size.
+
+8. FiraCode
+FiraCode supports font ligature feature. It can merge two or more charaters into one character to make code reading more clear. Note the !=, <=, and == in the screenshot below. Although I don’t like font ligature because I am familiar with original symbols and feel a little bit confused when seeing merged characters, but I believe this font would help for other people.
+
+Note: in VSCode the following line must be added to setting in order to enable font ligature.
+
+"editor.fontLigatures": true,
+9. Anonymous Pro
+I like Anonymous Pro because it gives a typewriter feeling. Also the < character is narrower than Hack which makes it feel like a symbol.
+
+10. IBM 3270
+IBM 3270 is based on the font used in IBM 3270 terminal, made by IBM in 1971. This font is great for programming purpose and gives a retro style (although I’m not quite getting used to it).
+
+Note this font is relatively small, so my suggestion is to increase the font size and decrease the line height to make it more readable on the screen.
+
+"editor.lineHeight": 20,
+"editor.fontSize": 14,
+11. Droid Sans Mono
+Droid Sans was created for Android and is a beautiful font. However the biggest problem is that it does not have slashed zero, so 0 and O are not distinguishable.
+
+UPDATE: Droid Sans Mono has slashed and dotted variants here. Thanks to hawtre smith.
+
+Thanks for reading! Hope this article can help you find a new font for your IDE or terminal, just like buying a new T-shirt! Please recommend this article if you like it!
+
+UPDATE:
+
+I got responses about other fonts for programming. Yes they are all amazing fonts and I totally agree with you! The main purpose of this post is to provide a base for those who have little experience playing with fonts, thus I will try to keep it minimal and not to overwhelming them. But thank you all for your responses, and I would like to try the fonts you mentioned in my daily work.
+
+Thanks to Kiarash Irandoust.
+TypographyProgrammingTechFonts
+Go to the profile of Charlee Li
+Charlee Li
+Full stack engineer & Tech writer @ Toronto.
+
+ITNEXT
+ITNEXT
+ITNEXT is a platform for IT developers & software engineers to share knowledge, connect, collaborate, learn and experience next-gen technologies.
+
+More from ITNEXT
+Angular: Effective Component Patterns
+Go to the profile of Erxk Verduin
+Erxk Verduin
+Jun 17
+More from ITNEXT
+What exactly is functional programming?
+Go to the profile of Aphinya Dechalert
+Aphinya Dechalert
+Jun 14
+More from ITNEXT
+Kotlin: Wrapping your head around LiveData, MutableLiveData, Coroutine Networking and ViewModel…
+Go to the profile of Ryan Godlonton-Shaw
+Ryan Godlonton-Shaw
+Jun 17
+Responses
+AndrewRobust
+Write a response…
+AndrewRobust
+Applause from Charlee Li (author)
+Go to the profile of p13t3rm
+p13t3rm
+May 15, 2018
+Not a bad list. But no love for San Francisco Mono?
+
+Applause from Charlee Li (author)
+Go to the profile of hawtre smith
+hawtre smith
+May 15, 2018
+Droid Sans Mono has Slashed and Dotted variants: https://github.com/AlbertoDorado/droid-sans-mono-zeromod
+
+Applause from Charlee Li (author)
+Go to the profile of Ivan Cantarino
+Ivan Cantarino
+May 15, 2018
+Just a side note: Menlo is not the default font nowadays; San Francisco Mono is, which is really good for programming as well.
