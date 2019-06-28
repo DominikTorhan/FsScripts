@@ -30,7 +30,7 @@ module UnitTests
             Assert.Pass()
     
         [<Test>]
-        member this.Test10()= 
+        member this.TestGetSeqNoneTranslatedWords()= 
             let seqText = seq ["Make"; "Zip"; "Put";"Hear";]  
             let seqDict = seq ["Make"; "Zip"; ]     
             let seqOut = Main.GetSeqNoneTranslatedWords(seqText, seqDict)

@@ -44,19 +44,19 @@ let SplitToLines(str: string)=
      
 
 let GetAllTranslatedWord (path: string)=
-    let str = System.IO.File.ReadAllText path 
+    let str = File.ReadAllText path 
     let seq = SplitToLines str 
     seq |> Seq.filter IsLineContainsTranslataion 
         |> Seq.map GetFirstWordFromLine  
 
 let WriteTextFile (folder: string, text: string)=
-     let path =  folder + "\\Output" + DateTime.Now.ToString(DateFormat) + ".txt" 
-     System.IO.File.WriteAllText(path, text)  
-     ()
+    let path =  folder + "\\Output" + DateTime.Now.ToString(DateFormat) + ".txt" 
+    File.WriteAllText(path, text)  
+    ()
     
-let GetSeqNoneTranslatedWords(seqText:seq<string>, seqDict:seq<string>)=
-     let predicate (s:string) = not (seqDict |> Seq.contains s)
-     seqText |> Seq.filter predicate 
+let GetSeqNoneTranslatedWords(seqText:seq<string>, seqDict:seq<string>)= 
+    let predicate (s:string) = not (seqDict |> Seq.exists (fun x -> x= s))
+    seqText |> Seq.filter predicate 
 
  
 let GenerateOutput(folder:string)=
