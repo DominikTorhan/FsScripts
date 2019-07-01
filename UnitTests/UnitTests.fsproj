@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="AddTranslationSign.fsx" />
     <Compile Include="Main.fs" />
     <None Include="ReadWords.fsx" />
     <Content Include="TextFile1.txt">
