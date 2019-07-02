@@ -18,7 +18,7 @@ let FormatWord(str: string)=
     result
 
 let GetWordsSeqByText(str: string)=
-    let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b")    
+    let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b")    //uwaga, nie ma polskich znaków
     let matchToStr (item : Match) = item.Value
     let seq = matches |> Seq.cast |> Seq.map matchToStr |> Seq.map FormatWord
     seq

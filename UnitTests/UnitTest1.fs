@@ -142,5 +142,11 @@ module UnitTests
         member this.TestTextFileToSeq(path:string)= 
             let seq = Main.ReadTextFile path  
             Assert.Pass() 
-    
-            
+     
+         [<TestCase("TextFile2.txt")>] 
+         member this.TestReadAllText_Encoding(path:string)= 
+             //let text = System.IO.File.ReadAllText path   
+             //let x = System.IO.File.WriteAllText("E:\\output.txt", text) 
+            //polskie znaki ¹æê³ñó
+             Assert.Pass() 
+
