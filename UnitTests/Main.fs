@@ -3,6 +3,7 @@
 open System
 open System.IO
 open System.Text.RegularExpressions
+open System.Text
 
 let DateFormat = "yyyyMMddTHHmmss"
 
@@ -60,10 +61,24 @@ let GetSeqNoneTranslatedWords(seqText:seq<string>, seqDict:seq<string>)=
 
  
 let GenerateOutput(folder:string)=
-     let seqText = ReadTextFile(folder+ "\\text.txt")
-     let seqDict = GetAllTranslatedWord(folder+ "\\dict.txt")
-     let seqOut = GetSeqNoneTranslatedWords(seqText, seqDict)
-     //let xxx = seqDict |> Seq.filter (fun s -> seqText |> Seq.contains s)
-     let str = SeqToText seqOut
-     let str' = "count " + (Seq.length seqOut).ToString() + "\n\n" + str
-     WriteTextFile(folder, str') 
+    let seqText = ReadTextFile(folder+ "\\text.txt")
+    let seqDict = GetAllTranslatedWord(folder+ "\\dict.txt")
+    let seqOut = GetSeqNoneTranslatedWords(seqText, seqDict)
+    //let xxx = seqDict |> Seq.filter (fun s -> seqText |> Seq.contains s)
+    let str = SeqToText seqOut
+    let str' = "count " + (Seq.length seqOut).ToString() + "\n\n" + str
+    WriteTextFile(folder, str') 
+      
+let AddSignToLine(line:string)=
+    match line with
+        | "" -> line
+        | _ -> line + " *" 
+
+let AddTranslationSign(folder : string) =
+    let path = folder + "\\dict.txt"
+    let str = System.IO.File.ReadAllText(path)
+    let lines = str.Split('\n') |> Array.toSeq |> Seq.map (fun s->s.Replace("\r", "")) 
+    let str' = lines |> Seq.map AddSignToLine |> String.concat "\r\n"
+    let path' =  folder + "\\Output" + System.DateTime.Now.ToString(DateFormat) + ".txt" 
+    System.IO.File.WriteAllText(path', str')  
+

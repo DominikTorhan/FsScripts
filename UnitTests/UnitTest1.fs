@@ -150,3 +150,7 @@ module UnitTests
             //polskie znaki ¹æê³ñó
              Assert.Pass() 
 
+         [<Test>] 
+         member this.TestAddTranslationSign()=
+             Main.AddTranslationSign this.FolderNe 
+             Assert.Pass() 
