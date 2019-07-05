@@ -69,16 +69,20 @@ let GenerateOutput(folder:string)=
     let str' = "count " + (Seq.length seqOut).ToString() + "\n\n" + str
     WriteTextFile(folder, str') 
       
-let AddSignToLine(line:string)=
+let AddSignToLine(line:string)=  
     match line with
-        | "" -> line
+        | line when line.Length < 3 -> line
         | _ -> line + " *" 
 
+let PathDict (folder:string)= folder + "\\dict.txt"
+
 let AddTranslationSign(folder : string) =
-    let path = folder + "\\dict.txt"
-    let str = System.IO.File.ReadAllText(path)
+    let str = System.IO.File.ReadAllText(PathDict(folder))
     let lines = str.Split('\n') |> Array.toSeq |> Seq.map (fun s->s.Replace("\r", "")) 
     let str' = lines |> Seq.map AddSignToLine |> String.concat "\r\n"
-    let path' =  folder + "\\Output" + System.DateTime.Now.ToString(DateFormat) + ".txt" 
-    System.IO.File.WriteAllText(path', str')  
+    System.IO.File.WriteAllText(folder, str')  
 
+let SortDictionary(folder : string) =   
+    let str' = "test"
+    WriteTextFile(folder, str') 
+    

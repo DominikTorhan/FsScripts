@@ -154,3 +154,10 @@ module UnitTests
          member this.TestAddTranslationSign()=
              Main.AddTranslationSign this.FolderNe 
              Assert.Pass() 
+ 
+         [<TestCase("xxxx", "xxxx *")>] 
+         [<TestCase("", "")>] 
+         [<TestCase("a", "a")>] 
+         member this.AddSignToLine(line : string, expected : string)= 
+            let result = Main.AddSignToLine(line)
+            Assert.AreEqual(expected, result)
