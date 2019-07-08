@@ -6,6 +6,8 @@ open System.Text.RegularExpressions
 open System.Text
 
 let DateFormat = "yyyyMMddTHHmmss"
+let PathDict (folder:string)= folder + "\\dict.txt"
+let PathText (folder:string)= folder + "\\text.txt"
 
 let SeqToText(seq: seq<string>)=
     let str = seq |> String.concat "\n" 
@@ -61,12 +63,14 @@ let GetSeqNoneTranslatedWords(seqText:seq<string>, seqDict:seq<string>)=
 
  
 let GenerateOutput(folder:string)=
-    let seqText = ReadTextFile(folder+ "\\text.txt")
-    let seqDict = GetAllTranslatedWord(folder+ "\\dict.txt")
+    let seqText = ReadTextFile(PathText folder)
+    let seqDict = GetAllTranslatedWord(PathDict folder)
     let seqOut = GetSeqNoneTranslatedWords(seqText, seqDict)
     //let xxx = seqDict |> Seq.filter (fun s -> seqText |> Seq.contains s)
     let str = SeqToText seqOut
-    let str' = "count " + (Seq.length seqOut).ToString() + "\n\n" + str
+    let str' = "count text " + (Seq.length seqText).ToString() + "\n\n" + str
+    let str' = "count dict " + (Seq.length seqDict).ToString() + "\n\n" + str'
+    let str' = "count out " + (Seq.length seqOut).ToString() + "\n\n" + str'
     WriteTextFile(folder, str') 
       
 let AddSignToLine(line:string)=  
@@ -74,13 +78,12 @@ let AddSignToLine(line:string)=
         | line when line.Length < 3 -> line
         | _ -> line + " *" 
 
-let PathDict (folder:string)= folder + "\\dict.txt"
 
 let AddTranslationSign(folder : string) =
     let str = System.IO.File.ReadAllText(PathDict(folder))
     let lines = str.Split('\n') |> Array.toSeq |> Seq.map (fun s->s.Replace("\r", "")) 
     let str' = lines |> Seq.map AddSignToLine |> String.concat "\r\n"
-    System.IO.File.WriteAllText(folder, str')  
+    WriteTextFile(folder, str') 
 
 let SortDictionary(folder : string) =   
     let str' = "test"

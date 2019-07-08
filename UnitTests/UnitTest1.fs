@@ -64,7 +64,7 @@ module UnitTests
               
         [<Test>] 
         member this.TestGetAllTranslatedWord () =   
-            let seq = Main.GetAllTranslatedWord "dict.txt"
+            let seq = Main.GetAllTranslatedWord(this.FolderNe + "\\dict.txt")
             Assert.Pass()
     
         [<Test>]
@@ -143,21 +143,14 @@ module UnitTests
             let seq = Main.ReadTextFile path  
             Assert.Pass() 
      
-         [<TestCase("TextFile2.txt")>] 
-         member this.TestReadAllText_Encoding(path:string)= 
-             //let text = System.IO.File.ReadAllText path   
-             //let x = System.IO.File.WriteAllText("E:\\output.txt", text) 
-            //polskie znaki ¹æê³ñó
-             Assert.Pass() 
-
-         [<Test>] 
-         member this.TestAddTranslationSign()=
-             Main.AddTranslationSign this.FolderNe 
-             Assert.Pass() 
+        [<Test>] 
+        member this.TestAddTranslationSign()=
+            Main.AddTranslationSign this.FolderNe 
+            Assert.Pass() 
  
-         [<TestCase("xxxx", "xxxx *")>] 
-         [<TestCase("", "")>] 
-         [<TestCase("a", "a")>] 
-         member this.AddSignToLine(line : string, expected : string)= 
-            let result = Main.AddSignToLine(line)
-            Assert.AreEqual(expected, result)
+        [<TestCase("xxxx", "xxxx *")>] 
+        [<TestCase("", "")>] 
+        [<TestCase("a", "a")>] 
+        member this.TestAddSignToLine(line : string, expected : string)= 
+           let result = Main.AddSignToLine(line)
+           Assert.AreEqual(expected, result)
