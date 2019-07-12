@@ -85,7 +85,10 @@ let AddTranslationSign(folder : string) =
     let str' = lines |> Seq.map AddSignToLine |> String.concat "\r\n"
     WriteTextFile(folder, str') 
 
-let SortDictionary(folder : string) =   
-    let str' = "test"
+let SortDictionary(folder : string) =    
+    let str = System.IO.File.ReadAllText(PathDict(folder))
+    let lines = SplitToLines str 
+    let linesSorted = lines |> Seq.sort
+    let str' = SeqToText linesSorted
     WriteTextFile(folder, str') 
     

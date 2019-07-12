@@ -154,3 +154,8 @@ module UnitTests
         member this.TestAddSignToLine(line : string, expected : string)= 
            let result = Main.AddSignToLine(line)
            Assert.AreEqual(expected, result)
+
+        [<Test>]
+        member this.TestSortDictionary()= 
+            Main.SortDictionary this.FolderNe
+            Assert.Pass()
