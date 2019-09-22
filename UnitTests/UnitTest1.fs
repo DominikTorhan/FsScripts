@@ -12,8 +12,6 @@ module UnitTests
     type TestClass () =
     
         member this.FolderNe = "E:\\test"
-    
-     
 
         member this.IsLineContainsWord(str: string, word: string) = 
             let matches = Regex.Matches(str, word)    
@@ -138,7 +136,6 @@ module UnitTests
             Assert.Pass() 
      
         [<TestCase("TextFile1.txt")>] 
-        [<TestCase("C:\Users\Admin\OneDrive\Documents\Managing_Oneself.txt")>] 
         member this.TestTextFileToSeq(path:string)= 
             let seq = Main.ReadTextFile path  
             Assert.Pass() 
