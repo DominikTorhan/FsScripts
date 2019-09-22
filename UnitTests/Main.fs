@@ -18,16 +18,21 @@ let FormatWord(str: string)=
     let result = head.ToString() + seqRest
     result
 
+
+
 let GetWordsSeqByText(str: string)=
     let matches = Regex.Matches(str, @"\b([a-zA-Z]{3,})\b")    //uwaga, nie ma polskich znaków
     let matchToStr (item : Match) = item.Value
-    let seq = matches |> Seq.cast |> Seq.map matchToStr |> Seq.map FormatWord
-    seq
+    let seq = matches |> Seq.cast |> Seq.map matchToStr |> Seq.map FormatWord 
+    //let g = seq |> Seq.groupBy (fun x -> x) |> Seq.sortByDescending (fun x -> x.)
+    let getCount(str:string, count:int) = count
+    let getText(str:string, count:int) = str
+    let seq' = seq |> Seq.countBy (fun x -> x) |> Seq.sortByDescending getCount |> Seq.map getText
+    seq'
 
 let ReadTextFile(path: string)= 
     let str = File.ReadAllText path
-    let seq = GetWordsSeqByText str 
-    seq |> Seq.distinct |> Seq.sort
+    GetWordsSeqByText str 
 
 let IsLineContainsTranslataion (line:string)= 
     let strs = line.Split([|' '|], StringSplitOptions.RemoveEmptyEntries)
@@ -64,7 +69,6 @@ let GenerateOutput(folder:string)=
     let seqText = ReadTextFile(folder+ "\\text.txt")
     let seqDict = GetAllTranslatedWord(folder+ "\\dict.txt")
     let seqOut = GetSeqNoneTranslatedWords(seqText, seqDict)
-    //let xxx = seqDict |> Seq.filter (fun s -> seqText |> Seq.contains s)
     let str = SeqToText seqOut
     let str' = "count " + (Seq.length seqOut).ToString() + "\n\n" + str
     WriteTextFile(folder, str') 

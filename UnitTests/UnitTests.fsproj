@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -14,15 +14,9 @@
 
   <ItemGroup>
     <None Include="SortDictionary.fsx" />
-    <Content Include="TextFile2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="AddTranslationSign.fsx" />
     <Compile Include="Main.fs" />
     <None Include="ReadWords.fsx" />
-    <Content Include="TextFile1.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Compile Include="UnitTest1.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

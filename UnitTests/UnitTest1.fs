@@ -158,3 +158,9 @@ module UnitTests
          member this.AddSignToLine(line : string, expected : string)= 
             let result = Main.AddSignToLine(line)
             Assert.AreEqual(expected, result)
+
+         [<TestCase([|"Ver"; "Abc"; "Pop"|], "Abc pop ver ver abc ver")>] 
+        member this.TestGetWordsSeqByText(expected:string[], text:string) =
+            let seq = Main.GetWordsSeqByText text
+            let array = seq |> Seq.toArray
+            Assert.AreEqual(expected, array)
