@@ -31,7 +31,7 @@ let GetWordsSeqByText(str: string)=
     let getText(str:string, count:int) = str
     let seq' = seq |> Seq.countBy (fun x -> x) |> Seq.sortByDescending getCount |> Seq.map getText
     seq'
-    
+
 let ReadTextFile(path: string)= 
     let str = File.ReadAllText path
     GetWordsSeqByText str 
@@ -96,4 +96,3 @@ let SortDictionary(folder : string) =
     let str' = SeqToText linesSorted
     WriteTextFile(folder, str') 
     
-zmiany do git revert
